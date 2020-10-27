@@ -1,0 +1,22 @@
+{
+	"name": "pro-shop",
+	"version": "1.0.0",
+	"description": "MERN e-commerce platform built with React, Redux, Express & MongoDB",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server/server"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/dejobratic/pro-shop.git"
+	},
+	"author": "Dejan Bratic",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/dejobratic/pro-shop/issues"
+	},
+	"homepage": "https://github.com/dejobratic/pro-shop#readme",
+	"dependencies": {
+		"express": "^4.17.1"
+	}
+}

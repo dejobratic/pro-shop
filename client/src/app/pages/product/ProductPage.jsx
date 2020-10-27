@@ -7,7 +7,7 @@ import Rating from "app/components/rating/Rating"
 import products from "products"
 
 const ProductPage = ({ match }) => {
-	const product = products.find((p) => p._id == match.params.productId)
+	const product = products.find((p) => p._id === match.params.productId)
 
 	return (
 		<>
@@ -55,7 +55,7 @@ const ProductPage = ({ match }) => {
 							<ListGroup.Item>
 								<Button
 									className="btn-block"
-									type="buton"
+									type="button"
 									disabled={product.countInStock === 0}
 								>
 									Add To Cart
