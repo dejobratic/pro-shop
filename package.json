@@ -3,8 +3,11 @@
 	"version": "1.0.0",
 	"description": "MERN e-commerce platform built with React, Redux, Express & MongoDB",
 	"main": "server.js",
+	"type": "module",
 	"scripts": {
-		"start": "node server/server"
+		"client": "cd client && yarn start",
+		"server": "nodemon server/server",
+		"start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
 	},
 	"repository": {
 		"type": "git",
@@ -17,6 +20,11 @@
 	},
 	"homepage": "https://github.com/dejobratic/pro-shop#readme",
 	"dependencies": {
+		"dotenv": "^8.2.0",
 		"express": "^4.17.1"
+	},
+	"devDependencies": {
+		"concurrently": "^5.3.0",
+		"nodemon": "^2.0.6"
 	}
 }

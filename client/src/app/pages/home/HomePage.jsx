@@ -1,11 +1,27 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Row, Col } from "react-bootstrap"
 
 import Product from "app/components/product/Product"
 
-import products from "products"
+import { restService } from "app/services/RestService"
+import Spinner from "app/components/spinner/Spinner"
 
 const HomePage = () => {
+	const [products, setProducts] = useState([])
+
+	useEffect(() => {
+		const getProducts = async () => {
+			const { data: products } = await restService.get("api/products")
+			setProducts(products)
+		}
+
+		getProducts()
+	}, [])
+
+	if (products === []) {
+		return <Spinner />
+	}
+
 	return (
 		<>
 			<h1>Latest Products</h1>

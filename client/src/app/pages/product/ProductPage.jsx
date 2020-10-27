@@ -1,13 +1,29 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap"
 
 import Rating from "app/components/rating/Rating"
+import Spinner from "app/components/spinner/Spinner"
 
-import products from "products"
+import { restService } from "app/services/RestService"
 
 const ProductPage = ({ match }) => {
-	const product = products.find((p) => p._id === match.params.productId)
+	const [product, setProduct] = useState()
+
+	useEffect(() => {
+		const getProduct = async () => {
+			const { data: product } = await restService.get(
+				`/api/products/${match.params.productId}`
+			)
+			setProduct(product)
+		}
+
+		getProduct()
+	}, [match])
+
+	if (product === undefined) {
+		return <Spinner />
+	}
 
 	return (
 		<>
