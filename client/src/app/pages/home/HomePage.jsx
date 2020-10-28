@@ -18,7 +18,7 @@ const HomePage = () => {
 		getProducts()
 	}, [])
 
-	if (products === []) {
+	if (products === [] || products === undefined) {
 		return <Spinner />
 	}
 

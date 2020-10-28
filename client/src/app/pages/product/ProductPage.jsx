@@ -27,27 +27,33 @@ const ProductPage = ({ match }) => {
 
 	return (
 		<>
-			<Link className="btn btn-light my-3" to="/">
-				Go Back
-			</Link>
+			<Row>
+				<Col md={2}>
+					<Link className="btn btn-light my-3" to="/">
+						Go Back
+					</Link>
+				</Col>
+				<Col md={9}>
+					<h3 className="my-2">{product.name}</h3>
+				</Col>
+			</Row>
 			<Row>
 				<Col md={6}>
 					<Image fluid src={product.image} alt={product.name} />
 				</Col>
 				<Col md={3}>
-					<ListGroup variant="flush">
-						<ListGroup.Item>
-							<h3>{product.name}</h3>
-						</ListGroup.Item>
-					</ListGroup>
 					<ListGroup.Item>
 						<Rating
 							value={product.rating}
 							text={`${product.numReviews} reviews`}
 						/>
 					</ListGroup.Item>
-					<ListGroup.Item>Price: ${product.price}</ListGroup.Item>
-					<ListGroup.Item>Description: {product.description}</ListGroup.Item>
+					<ListGroup.Item>
+						<strong>Price</strong>: ${product.price}
+					</ListGroup.Item>
+					<ListGroup.Item>
+						<strong>Description</strong>: {product.description}
+					</ListGroup.Item>
 				</Col>
 				<Col md={3}>
 					<Card>
