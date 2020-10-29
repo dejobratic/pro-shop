@@ -1,25 +1,17 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap"
+import { useSelector } from "react-redux"
 
 import Rating from "app/components/rating/Rating"
 import Spinner from "app/components/spinner/Spinner"
 
-import { restService } from "app/services/RestService"
+import { selectShopProductById } from "app/redux/shop/shop-selectors"
 
 const ProductPage = ({ match }) => {
-	const [product, setProduct] = useState()
+	const product = useSelector(selectShopProductById(match.params.productId))
 
-	useEffect(() => {
-		const getProduct = async () => {
-			const { data: product } = await restService.get(
-				`/api/products/${match.params.productId}`
-			)
-			setProduct(product)
-		}
-
-		getProduct()
-	}, [match])
+	console.log(product)
 
 	if (product === undefined) {
 		return <Spinner />

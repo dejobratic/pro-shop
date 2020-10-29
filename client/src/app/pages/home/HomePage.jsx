@@ -1,22 +1,14 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { Row, Col } from "react-bootstrap"
+import { useSelector } from "react-redux"
 
 import Product from "app/components/product/Product"
-
-import { restService } from "app/services/RestService"
 import Spinner from "app/components/spinner/Spinner"
 
+import { selectShopProducts } from "app/redux/shop/shop-selectors"
+
 const HomePage = () => {
-	const [products, setProducts] = useState([])
-
-	useEffect(() => {
-		const getProducts = async () => {
-			const { data: products } = await restService.get("api/products")
-			setProducts(products)
-		}
-
-		getProducts()
-	}, [])
+	const products = useSelector(selectShopProducts)
 
 	if (products === [] || products === undefined) {
 		return <Spinner />
