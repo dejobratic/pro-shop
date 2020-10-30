@@ -1,22 +1,10 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap"
-import { useSelector } from "react-redux"
 
 import Rating from "app/components/rating/Rating"
-import Spinner from "app/components/spinner/Spinner"
 
-import { selectShopProductById } from "app/redux/shop/shop-selectors"
-
-const ProductPage = ({ match }) => {
-	const product = useSelector(selectShopProductById(match.params.productId))
-
-	console.log(product)
-
-	if (product === undefined) {
-		return <Spinner />
-	}
-
+const ProductDetails = ({ product }) => {
 	return (
 		<>
 			<Row>
@@ -83,4 +71,4 @@ const ProductPage = ({ match }) => {
 	)
 }
 
-export default ProductPage
+export default ProductDetails

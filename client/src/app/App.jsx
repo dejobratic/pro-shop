@@ -1,19 +1,23 @@
+import { useEffect } from "react"
 import { Container } from "react-bootstrap"
 import { Route } from "react-router-dom"
+import { useDispatch } from "react-redux"
 
 import Header from "app/components/header/Header"
 import Footer from "app/components/footer/Footer"
 
-import HomePage from "app/pages/home/HomePage"
-import ProductPage from "app/pages/product/ProductPage"
+import { default as HomePage } from "app/pages/home/HomePageContainer"
+import { default as ProductPage } from "app/pages/product-details/ProductDetailsPageContainer"
 import CheckoutPage from "app/pages/checkout/CheckoutPage"
 
-import useActionDispatch from "app/hooks/useActionDispatch"
-
-import { loadShopProducts } from "app/redux/shop/shop-actions"
+import { loadProducts } from "app/redux/products/products-actions"
 
 const App = () => {
-	useActionDispatch(loadShopProducts)
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(loadProducts())
+	}, [dispatch])
 
 	return (
 		<>
