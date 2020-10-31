@@ -1,10 +1,26 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap"
+import React, { useState } from "react"
+import { Link, withRouter } from "react-router-dom"
+import { Row, Col, Image, ListGroup, Card, Button, Form } from "react-bootstrap"
+import { useDispatch } from "react-redux"
 
 import Rating from "app/components/rating/Rating"
 
-const ProductDetails = ({ product }) => {
+import { addProductToCart } from "app/redux/cart/cart-actions"
+
+const ProductDetails = ({ product, match, history }) => {
+	const dispatch = useDispatch()
+	const [quantity, setQuantity] = useState(1)
+
+	const onChangeQuantity = (event) => {
+		const quantity = event.target.value
+		setQuantity(quantity)
+	}
+
+	const onAddToCart = () => {
+		dispatch(addProductToCart({ ...product, quantity }))
+		history.push(`/cart/${product._id}?quantity=${quantity}`)
+	}
+
 	return (
 		<>
 			<Row>
@@ -54,11 +70,32 @@ const ProductDetails = ({ product }) => {
 									</Col>
 								</Row>
 							</ListGroup.Item>
+							{product.countInStock > 0 && (
+								<ListGroup.Item>
+									<Row>
+										<Col>Quantity:</Col>
+										<Col>
+											<Form.Control
+												as="select"
+												value={quantity}
+												onChange={onChangeQuantity}
+											>
+												{[...Array(product.countInStock).keys()].map((el) => (
+													<option key={el + 1} value={el + 1}>
+														{el + 1}
+													</option>
+												))}
+											</Form.Control>
+										</Col>
+									</Row>
+								</ListGroup.Item>
+							)}
 							<ListGroup.Item>
 								<Button
 									className="btn-block"
 									type="button"
 									disabled={product.countInStock === 0}
+									onClick={onAddToCart}
 								>
 									Add To Cart
 								</Button>
@@ -71,4 +108,4 @@ const ProductDetails = ({ product }) => {
 	)
 }
 
-export default ProductDetails
+export default withRouter(ProductDetails)
