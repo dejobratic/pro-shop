@@ -8,13 +8,13 @@ import Warning from "app/components/warning/Warning"
 import { selectProducts } from "app/redux/products/products-selectors"
 
 const HomePageContainer = () => {
-	const { error, data, isDataLoaded } = useSelector(selectProducts)
+  const { error, data, isDataLoaded } = useSelector(selectProducts)
 
-	if (error) return <Warning variant="danger">{error.message}</Warning>
+  if (error) return <Warning variant="danger">{error.message}</Warning>
 
-	if (isDataLoaded) return <HomePage products={data} />
+  if (isDataLoaded) return <HomePage products={data} />
 
-	return <Loader />
+  return <Loader />
 }
 
 export default HomePageContainer

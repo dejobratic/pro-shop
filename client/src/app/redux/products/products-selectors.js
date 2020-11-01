@@ -3,11 +3,11 @@ import { createSelector } from "reselect"
 export const selectProducts = (state) => state.products
 
 export const selectProductsData = createSelector(
-	[selectProducts],
-	(products) => products.data
+  [selectProducts],
+  (products) => products.data
 )
 
 export const selectProductsDataLoaded = createSelector(
-	[selectProducts],
-	(products) => products.isDataLoaded
+  [selectProducts],
+  (products) => products.isDataLoaded
 )

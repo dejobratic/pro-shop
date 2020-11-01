@@ -1,12 +1,11 @@
 import React from "react"
-import { Alert } from "react-bootstrap"
 
 const Warning = ({ variant, children }) => {
-	return <Alert variant={variant}>{children}</Alert>
+  return <div className={`alert alert-${variant}`}>{children}</div>
 }
 
 Error.defaultProps = {
-	variant: "blue",
+  variant: "primary",
 }
 
 export default Warning

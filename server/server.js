@@ -14,7 +14,7 @@ connectDb()
 const app = express()
 
 app.get("/", (req, res) => {
-	res.send("API is running...")
+  res.send("API is running...")
 })
 
 app.use("/api/products", productController)
@@ -25,9 +25,9 @@ app.use(errorHandler.server)
 const port = process.env.PORT || 5000
 
 app.listen(
-	port,
-	console.log(
-		`Server running in ${process.env.NODE_ENV} mode on port ${port}...`.yellow
-			.bold
-	)
+  port,
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port ${port}...`.yellow
+      .bold
+  )
 )

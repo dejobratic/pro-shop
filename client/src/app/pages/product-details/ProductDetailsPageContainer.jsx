@@ -10,20 +10,20 @@ import { loadProductDetails } from "app/redux/product-details/product-details-ac
 import { selectProduct } from "app/redux/product-details/product-details-selectors"
 
 const ProductDetailsPageContainer = ({ match }) => {
-	const productId = match.params.productId
-	const dispatch = useDispatch()
+  const productId = match.params.productId
+  const dispatch = useDispatch()
 
-	useEffect(() => {
-		dispatch(loadProductDetails(productId))
-	}, [dispatch, productId])
+  useEffect(() => {
+    dispatch(loadProductDetails(productId))
+  }, [dispatch, productId])
 
-	const { error, data, isDataLoaded } = useSelector(selectProduct)
+  const { error, data, isDataLoaded } = useSelector(selectProduct)
 
-	if (error) return <Warning variant="danger">{error.message}</Warning>
+  if (error) return <Warning variant="danger">{error.message}</Warning>
 
-	if (isDataLoaded) return <ProductDetailsPage product={data} />
+  if (isDataLoaded) return <ProductDetailsPage product={data} />
 
-	return <Loader />
+  return <Loader />
 }
 
 export default ProductDetailsPageContainer

@@ -1,42 +1,39 @@
 import React from "react"
-import { Card } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 import Rating from "app/components/rating/Rating"
 
-import "app/components/product/product.css"
-
 const ProductLink = ({ id, children }) => (
-	<Link to={`/products/${id}`}>{children}</Link>
+  <Link to={`/products/${id}`}>{children}</Link>
 )
 
 const Product = ({ product }) => {
-	const { _id: id } = product
+  const { _id: id } = product
 
-	return (
-		<Card className="my-3 p-3 rounded">
-			<ProductLink id={id}>
-				<Card.Img src={product.image} variant="top" />
-			</ProductLink>
+  return (
+    <div className="card my-3 p-3 rounded">
+      <ProductLink id={id}>
+        <img className="card-img" src={product.image} variant="top" />
+      </ProductLink>
 
-			<Card.Body>
-				<ProductLink id={id}>
-					<Card.Title as="div">
-						<strong>{product.name}</strong>
-					</Card.Title>
-				</ProductLink>
+      <div className="card-body">
+        <ProductLink id={id}>
+          <div className="card-title">
+            <strong>{product.name}</strong>
+          </div>
+        </ProductLink>
 
-				<Card.Text as="div">
-					<Rating
-						value={product.rating}
-						text={`${product.numReviews} reviews`}
-					/>
-				</Card.Text>
+        <div className="card-text">
+          <Rating
+            value={product.rating}
+            text={`${product.numReviews} reviews`}
+          />
+        </div>
 
-				<Card.Text as="h3">${product.price}</Card.Text>
-			</Card.Body>
-		</Card>
-	)
+        <h3 className="card-text">${product.price}</h3>
+      </div>
+    </div>
+  )
 }
 
 export default Product
