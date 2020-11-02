@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux"
 import Rating from "app/components/rating/Rating"
 
 import { addProductToCart } from "app/redux/cart/cart-actions"
+import Button from "app/components/button/Button"
 
 const ProductDetails = ({ product, match, history }) => {
   const dispatch = useDispatch()
@@ -76,7 +77,6 @@ const ProductDetails = ({ product, match, history }) => {
                     <div className="col">
                       <select
                         className="form-control"
-                        as="select"
                         value={quantity}
                         onChange={onChangeQuantity}
                       >
@@ -91,14 +91,12 @@ const ProductDetails = ({ product, match, history }) => {
                 </li>
               )}
               <li className="list-group-item">
-                <button
-                  className="btn-block"
-                  type="button"
-                  disabled={product.countInStock === 0}
+                <Button
+                  isDisabled={product.countInStock === 0}
                   onClick={onAddToCart}
                 >
-                  Add To Cart
-                </button>
+                  Add to Cart
+                </Button>
               </li>
             </ul>
           </div>

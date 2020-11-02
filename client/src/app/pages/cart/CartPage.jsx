@@ -6,7 +6,7 @@ import Warning from "app/components/warning/Warning"
 
 import {
   addProductToCart,
-  removeProductFromCart,
+  clearProductFromCart,
 } from "app/redux/cart/cart-actions"
 
 import {
@@ -14,6 +14,7 @@ import {
   selectCartProductsPrice,
   selectCartProductsQuantity,
 } from "app/redux/cart/cart-selectors"
+import Button from "app/components/button/Button"
 
 const CartPage = ({ history }) => {
   const dispatch = useDispatch()
@@ -29,8 +30,12 @@ const CartPage = ({ history }) => {
   return (
     <>
       <div className="row">
-        <div clasName="col-md-8">
+        <div className="col">
           <h1>Shopping Cart</h1>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-8">
           {products.length === 0 ? (
             <Warning>Your cart is empty</Warning>
           ) : (
@@ -54,9 +59,8 @@ const CartPage = ({ history }) => {
                     </div>
                     <div className="col-md-2">${product.price}</div>
                     <div className="col-md-3">
-                      <div
+                      <select
                         className="form-control"
-                        as="select"
                         value={product.quantity}
                         onChange={(e) =>
                           dispatch(
@@ -72,13 +76,13 @@ const CartPage = ({ history }) => {
                             {el + 1}
                           </option>
                         ))}
-                      </div>
+                      </select>
                     </div>
                     <div className="col-md-2">
                       <button
                         type="button"
-                        variant="light"
-                        onClick={() => dispatch(removeProductFromCart(product))}
+                        className="btn btn-light"
+                        onClick={() => dispatch(clearProductFromCart(product))}
                       >
                         <i className="fas fa-trash"></i>
                       </button>
@@ -92,18 +96,16 @@ const CartPage = ({ history }) => {
         <div className="col-md-4">
           <div className="card">
             <ul className="list-group-flush">
-              <li>
+              <li className="list-group-item">
                 <h5> Subtotal ({totalQuantity}) products</h5>${totalPrice}
               </li>
-              <li>
-                <button
-                  type="button"
-                  className="btn-block"
-                  disabled={products.length === 0}
+              <li className="list-group-item">
+                <Button
+                  isDisabled={products.length === 0}
                   onClick={onProceedToCheckout}
                 >
-                  Proceed To Checkout
-                </button>
+                  Proceed to checkout
+                </Button>
               </li>
             </ul>
           </div>

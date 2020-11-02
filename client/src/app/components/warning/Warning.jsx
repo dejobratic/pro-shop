@@ -1,10 +1,14 @@
 import React from "react"
 
 const Warning = ({ variant, children }) => {
-  return <div className={`alert alert-${variant}`}>{children}</div>
+  return (
+    <div className={`alert alert-${variant}`} role="alert">
+      {children}
+    </div>
+  )
 }
 
-Error.defaultProps = {
+Warning.defaultProps = {
   variant: "primary",
 }
 
