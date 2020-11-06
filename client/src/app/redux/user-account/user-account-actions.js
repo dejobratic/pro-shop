@@ -2,11 +2,17 @@ export const userAccountActions = {
   USER_SIGN_IN_START: "USER_SIGN_IN_START",
   USER_SIGN_IN_SUCCESS: "USER_SIGN_IN_SUCCESS",
   USER_SIGN_IN_FAILURE: "USER_SIGN_IN_FAILURE",
+
+  USER_SIGN_UP_START: "USER_SIGN_UP_START",
+  USER_SIGN_UP_SUCCESS: "USER_SIGN_UP_SUCCESS",
+  USER_SIGN_UP_FAILURE: "USER_SIGN_UP_FAILURE",
+
   USER_SIGN_OUT_START: "USER_SIGN_OUT_START",
   USER_SIGN_OUT_SUCCESS: "USER_SIGN_OUT_SUCCESS",
   USER_SIGN_OUT_FAILURE: "USER_SIGN_OUT_FAILURE",
 }
 
+// SIGN IN
 export const userSignIn = (email, password) => ({
   type: userAccountActions.USER_SIGN_IN_START,
   payload: { email, password },
@@ -22,6 +28,23 @@ export const userSignInFailure = (error) => ({
   payload: error,
 })
 
+// SIGN UP
+export const userSignUp = (user) => ({
+  type: userAccountActions.USER_SIGN_UP_START,
+  payload: user,
+})
+
+export const userSignUpSuccess = (user) => ({
+  type: userAccountActions.USER_SIGN_UP_SUCCESS,
+  payload: user,
+})
+
+export const userSignUpFailure = (error) => ({
+  type: userAccountActions.USER_SIGN_UP_FAILURE,
+  payload: error,
+})
+
+// SIGN OUT
 export const userSignOut = () => ({
   type: userAccountActions.USER_SIGN_OUT_START,
 })

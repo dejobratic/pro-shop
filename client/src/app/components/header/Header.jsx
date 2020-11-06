@@ -22,7 +22,6 @@ const Header = ({ history }) => {
 
   const onToggleIsDropdownCollapsed = () => {
     setIsDropdownCollapsed(!isDropdownCollapsed)
-    console.log({ isDropdownCollapsed })
   }
 
   const onGoToCheckout = () => {

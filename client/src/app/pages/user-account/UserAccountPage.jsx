@@ -4,30 +4,25 @@ import { Link } from "react-router-dom"
 
 import FormContainer from "app/components/form-container/FormContainer"
 import SignInForm from "app/components/sign-in-form/SignInForm"
+import SignUpForm from "app/components/sign-up-form/SignUpForm"
 import Warning from "app/components/warning/Warning"
 
 import { selectUserAccountError } from "app/redux/user-account/user-account-selectors"
 
-const UserAccountPage = ({ redirect }) => {
+const UserAccountPage = () => {
   const error = useSelector(selectUserAccountError)
 
   return (
     <>
       {error && <Warning variant="danger">{error}</Warning>}
-      <SignInForm />
-
-      <FormContainer>
-        <div className="py-3">
-          <div className="col">
-            New Customer?{" "}
-            <Link
-              to={redirect ? `/register?redirect=${redirect}` : "/register"}
-            >
-              Register
-            </Link>
-          </div>
+      <div className="row">
+        <div className="col">
+          <SignInForm />
         </div>
-      </FormContainer>
+        <div className="col">
+          <SignUpForm />
+        </div>
+      </div>
     </>
   )
 }

@@ -92,7 +92,7 @@ const ProductDetails = ({ product, match, history }) => {
               )}
               <li className="list-group-item d-flex justify-content-center">
                 <Button
-                  isDisabled={product.countInStock === 0}
+                  disabled={product.countInStock === 0}
                   onClick={onAddToCart}
                 >
                   Add to Cart
