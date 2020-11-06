@@ -3,9 +3,9 @@ import { Link, withRouter } from "react-router-dom"
 import { useDispatch } from "react-redux"
 
 import Rating from "app/components/rating/Rating"
+import Button from "app/components/button/Button"
 
 import { addProductToCart } from "app/redux/cart/cart-actions"
-import Button from "app/components/button/Button"
 
 const ProductDetails = ({ product, match, history }) => {
   const dispatch = useDispatch()
@@ -29,12 +29,12 @@ const ProductDetails = ({ product, match, history }) => {
             Go Back
           </Link>
         </div>
-        <div className="col-md-9">
+        <div className="col-md-8">
           <h3 className="my-2">{product.name}</h3>
         </div>
       </div>
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-5">
           <img className="img-fluid" src={product.image} alt={product.name} />
         </div>
         <div className="col-md-3">
@@ -53,7 +53,7 @@ const ProductDetails = ({ product, match, history }) => {
         </div>
         <div className="col-md-3">
           <div className="card">
-            <ul className="list-group-flush">
+            <ul className="list-group">
               <li className="list-group-item">
                 <div className="row">
                   <div className="col">Price:</div>
@@ -90,7 +90,7 @@ const ProductDetails = ({ product, match, history }) => {
                   </div>
                 </li>
               )}
-              <li className="list-group-item">
+              <li className="list-group-item d-flex justify-content-center">
                 <Button
                   isDisabled={product.countInStock === 0}
                   onClick={onAddToCart}

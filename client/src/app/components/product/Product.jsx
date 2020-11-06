@@ -13,7 +13,7 @@ const Product = ({ product }) => {
   return (
     <div className="card my-3 p-3 rounded">
       <ProductLink id={id}>
-        <img className="card-img" src={product.image} variant="top" />
+        <img className="card-img-top" src={product.image} alt={product.name} />
       </ProductLink>
 
       <div className="card-body">

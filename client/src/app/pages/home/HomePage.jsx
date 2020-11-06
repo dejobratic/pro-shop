@@ -9,7 +9,7 @@ const HomePage = ({ products }) => {
       <div className="row">
         {products.map((product) => (
           <div
-            className="col col-sm-12 col-md-6 col-lg-4 col-xl-3"
+            className="col col-sm-12 col-md-6 col-lg-5 col-xl-4"
             key={product._id}
           >
             <Product product={product} />

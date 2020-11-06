@@ -8,12 +8,14 @@ import {
 
 import { productService } from "app/services/ProductService"
 
+import { getDetails } from "app/utils/error-extensions"
+
 function* loadProducts() {
   try {
     const products = yield productService.getAll()
     yield put(loadProductsSuccess(products))
   } catch (error) {
-    yield put(loadProductsFailure(error))
+    yield put(loadProductsFailure(getDetails(error)))
   }
 }
 

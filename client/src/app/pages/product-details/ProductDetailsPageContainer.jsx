@@ -19,7 +19,7 @@ const ProductDetailsPageContainer = ({ match }) => {
 
   const { error, data, isDataLoaded } = useSelector(selectProduct)
 
-  if (error) return <Warning variant="danger">{error.message}</Warning>
+  if (error) return <Warning variant="danger">{error}</Warning>
 
   if (isDataLoaded) return <ProductDetailsPage product={data} />
 

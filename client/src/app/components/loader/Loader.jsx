@@ -3,7 +3,7 @@ import React from "react"
 const Loader = () => {
   return (
     <div
-      class="spinner-border"
+      className="spinner-border"
       role="status"
       style={{
         width: "100px",

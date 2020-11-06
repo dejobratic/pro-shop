@@ -10,7 +10,7 @@ import { selectProducts } from "app/redux/products/products-selectors"
 const HomePageContainer = () => {
   const { error, data, isDataLoaded } = useSelector(selectProducts)
 
-  if (error) return <Warning variant="danger">{error.message}</Warning>
+  if (error) return <Warning variant="danger">{error}</Warning>
 
   if (isDataLoaded) return <HomePage products={data} />
 

@@ -9,6 +9,7 @@ import { default as HomePage } from "app/pages/home/HomePageContainer"
 import { default as ProductPage } from "app/pages/product-details/ProductDetailsPageContainer"
 import CartPage from "app/pages/cart/CartPage"
 import CheckoutPage from "app/pages/checkout/CheckoutPage"
+import { default as UserAccountPage } from "app/pages/user-account/UserAccountPageContainer"
 
 import { loadProducts } from "app/redux/products/products-actions"
 
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/products/:productId" component={ProductPage} />
           <Route path="/cart/:productId?" component={CartPage} />
           <Route path="/checkout" component={CheckoutPage} />
+          <Route path="/login" component={UserAccountPage} />
         </div>
       </main>
       <Footer />
