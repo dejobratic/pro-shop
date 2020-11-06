@@ -8,11 +8,11 @@ const INITIAL_STATE = {
 
 const userAccountReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case userAccountActions.USER_LOG_IN_START:
-    case userAccountActions.USER_LOG_OUT_START:
+    case userAccountActions.USER_SIGN_IN_START:
+    case userAccountActions.USER_SIGN_OUT_START:
       return { ...state, error: null, isLoaded: false }
 
-    case userAccountActions.USER_LOG_IN_SUCCESS:
+    case userAccountActions.USER_SIGN_IN_SUCCESS:
       return {
         ...state,
         error: null,
@@ -20,11 +20,11 @@ const userAccountReducer = (state = INITIAL_STATE, action) => {
         currentUser: action.payload,
       }
 
-    case userAccountActions.USER_LOG_OUT_SUCCESS:
+    case userAccountActions.USER_SIGN_OUT_SUCCESS:
       return { ...state, error: null, isLoaded: true, currentUser: null }
 
-    case userAccountActions.USER_LOG_IN_FAILURE:
-    case userAccountActions.USER_LOG_OUT_FAILURE:
+    case userAccountActions.USER_SIGN_IN_FAILURE:
+    case userAccountActions.USER_SIGN_OUT_FAILURE:
       return { ...state, error: action.payload, isLoaded: true }
 
     default:

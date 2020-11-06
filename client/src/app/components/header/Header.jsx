@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Link, withRouter } from "react-router-dom"
 
-import { userLogOut } from "app/redux/user-account/user-account-actions"
+import { userSignOut } from "app/redux/user-account/user-account-actions"
 import { selectCurrentUser } from "app/redux/user-account/user-account-selectors"
 import { selectCartProductsQuantity } from "app/redux/cart/cart-selectors"
 
@@ -31,8 +31,8 @@ const Header = ({ history }) => {
     setIsDropdownCollapsed(true)
   }
 
-  const onLogOut = () => {
-    dispatch(userLogOut())
+  const onSignOut = () => {
+    dispatch(userSignOut())
     history.push("/login")
 
     setIsDropdownCollapsed(true)
@@ -99,7 +99,7 @@ const Header = ({ history }) => {
                       Checkout
                     </div>
                     <div className="dropdown-divider"></div>
-                    <div className="dropdown-item" onClick={onLogOut}>
+                    <div className="dropdown-item" onClick={onSignOut}>
                       <i className="fas fa-sign-out-alt" /> Sign Out
                     </div>
                   </div>

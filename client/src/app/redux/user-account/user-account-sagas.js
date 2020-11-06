@@ -2,9 +2,9 @@ import { takeLatest, put, all, call } from "redux-saga/effects"
 
 import {
   userAccountActions,
-  userLogInSuccess,
-  userLogInFailure,
-  userLogOutSuccess,
+  userSignInSuccess,
+  userSignInFailure,
+  userSignOutSuccess,
 } from "app/redux/user-account/user-account-actions"
 
 import { userAccountService } from "app/services/UserAccountService"
@@ -18,24 +18,24 @@ function* logInUser(action) {
       email,
       password
     )
-    yield put(userLogInSuccess(user))
+    yield put(userSignInSuccess(user))
   } catch (error) {
-    yield put(userLogInFailure(getDetails(error)))
+    yield put(userSignInFailure(getDetails(error)))
   }
 }
 
 function* logOutUser() {
-  yield put(userLogOutSuccess())
+  yield put(userSignOutSuccess())
 }
 
-function* onUserLogInStart() {
-  yield takeLatest(userAccountActions.USER_LOG_IN_START, logInUser)
+function* onUserSignInStart() {
+  yield takeLatest(userAccountActions.USER_SIGN_IN_START, logInUser)
 }
 
-function* onUserLogOutStart() {
-  yield takeLatest(userAccountActions.USER_LOG_OUT_START, logOutUser)
+function* onUserSignOutStart() {
+  yield takeLatest(userAccountActions.USER_SIGN_OUT_START, logOutUser)
 }
 
 export function* userAccountSagas() {
-  yield all([call(onUserLogInStart), call(onUserLogOutStart)])
+  yield all([call(onUserSignInStart), call(onUserSignOutStart)])
 }

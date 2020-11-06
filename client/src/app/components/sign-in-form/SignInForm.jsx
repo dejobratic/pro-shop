@@ -5,7 +5,7 @@ import FormContainer from "app/components/form-container/FormContainer"
 import FormInput from "app/components/form-input/FormInput"
 import Button from "app/components/button/Button"
 
-import { userLogIn } from "app/redux/user-account/user-account-actions"
+import { userSignIn } from "app/redux/user-account/user-account-actions"
 
 const SignInForm = () => {
   const dispatch = useDispatch()
@@ -14,7 +14,7 @@ const SignInForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    dispatch(userLogIn(email, password))
+    dispatch(userSignIn(email, password))
   }
 
   return (
