@@ -1,22 +1,32 @@
 import React, { useEffect } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import UserAccountPage from "app/pages/user-account/UserAccountPage"
 import Loader from "app/components/loader/Loader"
 
+import { loadUserProfile } from "app/redux/user-account/user-account-actions"
 import { selectUserAccount } from "app/redux/user-account/user-account-selectors"
 
-const UserAccountPageContainer = ({ history, location }) => {
-  const { currentUser, isLoaded } = useSelector(selectUserAccount)
-  const redirect = location.search ? location.search.split("=")[1] : "/"
+import { selectCurrentUser } from "app/redux/user-login/user-login-selectors"
+
+const UserAccountPageContainer = ({ history }) => {
+  const dispatch = useDispatch()
+  const currentUser = useSelector(selectCurrentUser)
 
   useEffect(() => {
     if (currentUser) {
-      history.push(redirect)
+      dispatch(loadUserProfile(currentUser._id, currentUser.token))
+    } else {
+      history.push("/login")
     }
-  }, [history, currentUser, redirect])
+  }, [history, dispatch, currentUser])
 
-  if (isLoaded) return <UserAccountPage redirect={redirect} />
+  const { profile, isDataLoaded } = useSelector(selectUserAccount)
+
+  if (isDataLoaded)
+    return (
+      <UserAccountPage profile={{ ...profile, token: currentUser.token }} /> //TODO: leaking logic fix
+    )
 
   return <Loader />
 }

@@ -36,6 +36,21 @@ class UserRepository {
 
     return map(newUser)
   }
+
+  async update(user) {
+    const { _id: id } = user
+
+    const existingUser = await User.findById(id)
+    if (!existingUser) throw new NotFoundError(`No user found with id ${id}.`)
+
+    // TODO: move validation to other layer
+    existingUser.name = user.name || existingUser.name
+    existingUser.email = user.email || existingUser.email
+    existingUser.password = user.password || existingUser.password
+
+    const updatedUser = await existingUser.save()
+    return map(updatedUser)
+  }
 }
 
 const map = (user) => ({

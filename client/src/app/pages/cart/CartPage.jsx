@@ -49,7 +49,7 @@ const CartPage = ({ history }) => {
               </li>
               <li className="list-group-item d-flex justify-content-center">
                 <Button
-                  dispatch={products.length === 0}
+                  disabled={products.length === 0}
                   onClick={onProceedToCheckout}
                 >
                   Proceed to checkout

@@ -23,6 +23,6 @@ function* onLoadProductsStart() {
   yield takeLatest(productsActions.LOAD_PRODUCTS_START, loadProducts)
 }
 
-export function* productsSagas() {
+export default function* productsSagas() {
   yield all([call(onLoadProductsStart)])
 }

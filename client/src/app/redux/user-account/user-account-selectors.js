@@ -2,9 +2,9 @@ import { createSelector } from "reselect"
 
 export const selectUserAccount = (state) => state.userAccount
 
-export const selectCurrentUser = createSelector(
+export const selectUserProfile = createSelector(
   [selectUserAccount],
-  (userAccount) => userAccount.currentUser
+  (userAccount) => userAccount.profile
 )
 
 export const selectUserAccountError = createSelector(

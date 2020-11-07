@@ -2,8 +2,8 @@ import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Link, withRouter } from "react-router-dom"
 
-import { userSignOut } from "app/redux/user-account/user-account-actions"
-import { selectCurrentUser } from "app/redux/user-account/user-account-selectors"
+import { userSignOut } from "app/redux/user-login/user-login-actions"
+import { selectCurrentUser } from "app/redux/user-login/user-login-selectors"
 import { selectCartProductsQuantity } from "app/redux/cart/cart-selectors"
 
 import "app/components/header/header.css"
@@ -22,6 +22,10 @@ const Header = ({ history }) => {
 
   const onToggleIsDropdownCollapsed = () => {
     setIsDropdownCollapsed(!isDropdownCollapsed)
+  }
+
+  const onGoToAccount = () => {
+    history.push("/account")
   }
 
   const onGoToCheckout = () => {
@@ -94,6 +98,9 @@ const Header = ({ history }) => {
                     }`}
                     aria-labelledby="navbarDropdown"
                   >
+                    <div className="dropdown-item" onClick={onGoToAccount}>
+                      Account
+                    </div>
                     <div className="dropdown-item" onClick={onGoToCheckout}>
                       Checkout
                     </div>

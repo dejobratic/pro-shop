@@ -23,6 +23,16 @@ const registerUser = asyncHandler(async (req, res) => {
   res.status(201).json(withToken(user))
 })
 
+// @desc    Update user
+// @route   POST /api/users
+// @access  Private
+const updateUser = asyncHandler(async (req, res) => {
+  const user = req.body
+  const updatedUser = await userRepository.update(user)
+
+  res.status(200).json(withToken(updatedUser))
+})
+
 // @desc    Get user
 // @route   GET /api/users
 // @access  Private
@@ -39,4 +49,4 @@ const withToken = (user) => ({
   token: jwtGenerator.generate({ id: user._id }),
 })
 
-export { authUser, registerUser, getUser }
+export { authUser, registerUser, updateUser, getUser }

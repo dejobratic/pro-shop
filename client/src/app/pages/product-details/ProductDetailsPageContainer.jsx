@@ -17,11 +17,11 @@ const ProductDetailsPageContainer = ({ match }) => {
     dispatch(loadProductDetails(productId))
   }, [dispatch, productId])
 
-  const { error, data, isDataLoaded } = useSelector(selectProduct)
+  const { error, data: product, isDataLoaded } = useSelector(selectProduct)
 
   if (error) return <Warning variant="danger">{error}</Warning>
 
-  if (isDataLoaded) return <ProductDetailsPage product={data} />
+  if (isDataLoaded) return <ProductDetailsPage product={product} />
 
   return <Loader />
 }

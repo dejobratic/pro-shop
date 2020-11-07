@@ -1,61 +1,51 @@
-import { takeLatest, put, all, call } from "redux-saga/effects"
+import { takeLatest, put, call, all } from "redux-saga/effects"
 
+import { userAccountActions } from "app/redux/user-account/user-account-actions"
 import {
-  userAccountActions,
-  userSignInSuccess,
-  userSignInFailure,
-  userSignUpSuccess,
-  userSignUpFailure,
-  userSignOutSuccess,
+  loadUserProfileSuccess,
+  loadUserProfileFailure,
+  userProfileUpdateSuccess,
+  userProfileUpdateFailure,
 } from "app/redux/user-account/user-account-actions"
 
 import { userAccountService } from "app/services/UserAccountService"
 
 import { getDetails } from "app/utils/error-extensions"
 
-function* logInUser(action) {
+function* getUserProfile(action) {
   try {
-    const { email, password } = action.payload
-    const user = yield userAccountService.signInWithEmailAndPassword(
-      email,
-      password
+    const { id, token } = action.payload
+    const profile = yield userAccountService.getProfile(id, `Bearer ${token}`)
+    yield put(loadUserProfileSuccess(profile))
+  } catch (error) {
+    yield put(loadUserProfileFailure(getDetails(error)))
+  }
+}
+
+function* updateUserProfile(action) {
+  try {
+    const { profile, token } = action.payload
+    const updatedProfile = yield userAccountService.updateProfile(
+      profile,
+      `Bearer ${token}`
     )
-    yield put(userSignInSuccess(user))
+    yield put(userProfileUpdateSuccess(updatedProfile))
   } catch (error) {
-    yield put(userSignInFailure(getDetails(error)))
+    yield put(userProfileUpdateFailure(getDetails(error)))
   }
 }
 
-function* signUpUser(action) {
-  try {
-    const newUser = action.payload
-    const signedUpUser = yield userAccountService.signUp(newUser)
-    yield put(userSignUpSuccess(signedUpUser))
-  } catch (error) {
-    yield put(userSignUpFailure(getDetails(error)))
-  }
+function* onGetUserProfile() {
+  yield takeLatest(userAccountActions.LOAD_USER_PROFILE_START, getUserProfile)
 }
 
-function* logOutUser() {
-  yield put(userSignOutSuccess())
+function* onUpdateUserProfile() {
+  yield takeLatest(
+    userAccountActions.USER_PROFILE_UPDATE_START,
+    updateUserProfile
+  )
 }
 
-function* onUserSignInStart() {
-  yield takeLatest(userAccountActions.USER_SIGN_IN_START, logInUser)
-}
-
-function* onUserSignUpStart() {
-  yield takeLatest(userAccountActions.USER_SIGN_UP_START, signUpUser)
-}
-
-function* onUserSignOutStart() {
-  yield takeLatest(userAccountActions.USER_SIGN_OUT_START, logOutUser)
-}
-
-export function* userAccountSagas() {
-  yield all([
-    call(onUserSignInStart),
-    call(onUserSignUpStart),
-    call(onUserSignOutStart),
-  ])
+export default function* userAccountSagas() {
+  yield all([call(onGetUserProfile), call(onUpdateUserProfile)])
 }

@@ -26,6 +26,6 @@ function* onLoadProductDetails() {
   )
 }
 
-export function* productDetailsSagas() {
+export default function* productDetailsSagas() {
   yield all([call(onLoadProductDetails)])
 }

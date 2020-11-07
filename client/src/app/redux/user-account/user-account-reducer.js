@@ -2,33 +2,39 @@ import { userAccountActions } from "app/redux/user-account/user-account-actions"
 
 const INITIAL_STATE = {
   error: null,
-  currentUser: null,
-  isLoaded: true,
+  profile: null,
+  orders: null,
+  isDataLoaded: false,
 }
 
 const userAccountReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case userAccountActions.USER_SIGN_IN_START:
-    case userAccountActions.USER_SIGN_UP_START:
-    case userAccountActions.USER_SIGN_OUT_START:
-      return { ...state, error: null, isLoaded: false }
-
-    case userAccountActions.USER_SIGN_IN_SUCCESS:
-    case userAccountActions.USER_SIGN_UP_SUCCESS:
+    case userAccountActions.LOAD_USER_PROFILE_START:
+    case userAccountActions.USER_PROFILE_UPDATE_START:
       return {
         ...state,
         error: null,
-        isLoaded: true,
-        currentUser: action.payload,
+        profile: null,
+        isDataLoaded: false,
       }
 
-    case userAccountActions.USER_SIGN_OUT_SUCCESS:
-      return { ...state, error: null, isLoaded: true, currentUser: null }
+    case userAccountActions.LOAD_USER_PROFILE_SUCCESS:
+    case userAccountActions.USER_PROFILE_UPDATE_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        profile: action.payload,
+        isDataLoaded: true,
+      }
 
-    case userAccountActions.USER_SIGN_IN_FAILURE:
-    case userAccountActions.USER_SIGN_UP_FAILURE:
-    case userAccountActions.USER_SIGN_OUT_FAILURE:
-      return { ...state, error: action.payload, isLoaded: true }
+    case userAccountActions.LOAD_USER_PROFILE_FAILURE:
+    case userAccountActions.USER_PROFILE_UPDATE_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        profile: null,
+        isDataLoaded: true,
+      }
 
     default:
       return state

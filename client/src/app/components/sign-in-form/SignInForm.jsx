@@ -5,7 +5,7 @@ import FormContainer from "app/components/form-container/FormContainer"
 import FormInput from "app/components/form-input/FormInput"
 import Button from "app/components/button/Button"
 
-import { userSignIn } from "app/redux/user-account/user-account-actions"
+import { userSignIn } from "app/redux/user-login/user-login-actions"
 
 const SignInForm = () => {
   const dispatch = useDispatch()

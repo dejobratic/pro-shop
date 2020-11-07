@@ -1,59 +1,39 @@
 export const userAccountActions = {
-  USER_SIGN_IN_START: "USER_SIGN_IN_START",
-  USER_SIGN_IN_SUCCESS: "USER_SIGN_IN_SUCCESS",
-  USER_SIGN_IN_FAILURE: "USER_SIGN_IN_FAILURE",
+  LOAD_USER_PROFILE_START: "LOAD_USER_PROFILE_START",
+  LOAD_USER_PROFILE_SUCCESS: "LOAD_USER_PROFILE_SUCCESS",
+  LOAD_USER_PROFILE_FAILURE: "LOAD_USER_PROFILE_FAILURE",
 
-  USER_SIGN_UP_START: "USER_SIGN_UP_START",
-  USER_SIGN_UP_SUCCESS: "USER_SIGN_UP_SUCCESS",
-  USER_SIGN_UP_FAILURE: "USER_SIGN_UP_FAILURE",
-
-  USER_SIGN_OUT_START: "USER_SIGN_OUT_START",
-  USER_SIGN_OUT_SUCCESS: "USER_SIGN_OUT_SUCCESS",
-  USER_SIGN_OUT_FAILURE: "USER_SIGN_OUT_FAILURE",
+  USER_PROFILE_UPDATE_START: "USER_PROFILE_UPDATE_START",
+  USER_PROFILE_UPDATE_SUCCESS: "USER_PROFILE_UPDATE_SUCCESS",
+  USER_PROFILE_UPDATE_FAILURE: "USER_PROFILE_UPDATE_FAILURE",
 }
 
-// SIGN IN
-export const userSignIn = (email, password) => ({
-  type: userAccountActions.USER_SIGN_IN_START,
-  payload: { email, password },
+export const loadUserProfile = (id, token) => ({
+  type: userAccountActions.LOAD_USER_PROFILE_START,
+  payload: { id, token },
 })
 
-export const userSignInSuccess = (user) => ({
-  type: userAccountActions.USER_SIGN_IN_SUCCESS,
-  payload: user,
+export const loadUserProfileSuccess = (profile) => ({
+  type: userAccountActions.LOAD_USER_PROFILE_SUCCESS,
+  payload: profile,
 })
 
-export const userSignInFailure = (error) => ({
-  type: userAccountActions.USER_SIGN_IN_FAILURE,
+export const loadUserProfileFailure = (error) => ({
+  type: userAccountActions.LOAD_USER_PROFILE_FAILURE,
   payload: error,
 })
 
-// SIGN UP
-export const userSignUp = (user) => ({
-  type: userAccountActions.USER_SIGN_UP_START,
-  payload: user,
+export const userProfileUpdate = (profile, token) => ({
+  type: userAccountActions.USER_PROFILE_UPDATE_START,
+  payload: { profile, token },
 })
 
-export const userSignUpSuccess = (user) => ({
-  type: userAccountActions.USER_SIGN_UP_SUCCESS,
-  payload: user,
+export const userProfileUpdateSuccess = (profile) => ({
+  type: userAccountActions.USER_PROFILE_UPDATE_SUCCESS,
+  payload: profile,
 })
 
-export const userSignUpFailure = (error) => ({
-  type: userAccountActions.USER_SIGN_UP_FAILURE,
-  payload: error,
-})
-
-// SIGN OUT
-export const userSignOut = () => ({
-  type: userAccountActions.USER_SIGN_OUT_START,
-})
-
-export const userSignOutSuccess = () => ({
-  type: userAccountActions.USER_SIGN_OUT_SUCCESS,
-})
-
-export const userSignOutFailure = (error) => ({
-  type: userAccountActions.USER_SIGN_OUT_FAILURE,
+export const userProfileUpdateFailure = (error) => ({
+  type: userAccountActions.USER_PROFILE_UPDATE_FAILURE,
   payload: error,
 })
