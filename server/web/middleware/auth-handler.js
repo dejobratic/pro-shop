@@ -1,28 +1,35 @@
 import jwt from "jsonwebtoken"
 import asyncHandler from "express-async-handler"
 
-import User from "../../database/models/User.js"
+import UnauthorizedError from "../../core/errors/UnauthorizedError.js"
+
+import { userRepository } from "../../database/services/UserRepository.js"
 
 const authorize = asyncHandler(async (req, res, next) => {
-  let {
+  const {
     headers: { authorization: bearerToken },
   } = req
 
-  if (!bearerToken || !bearerToken.startsWith("Bearer")) {
-    res.status(401)
-    throw new Error("Not authorized.", "No valid token found.")
-  }
+  throwIfInvalid(bearerToken)
+  const { id } = decodeBearerToken(bearerToken)
+  req.user = await userRepository.get(id)
+  next()
+})
 
+const throwIfInvalid = (bearerToken) => {
+  if (!bearerToken || !bearerToken.startsWith("Bearer")) {
+    throw new UnauthorizedError("No valid token found.")
+  }
+}
+
+const decodeBearerToken = (bearerToken) => {
   try {
     const token = bearerToken.split(" ")[1]
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    req.user = await User.findById(decoded.id).select("-password")
-    next()
+    return jwt.verify(token, process.env.JWT_SECRET)
   } catch (error) {
     console.error(error)
-    res.status(401)
-    throw new Error("Not authorized.", "Token failed.")
+    throw new UnauthorizedError("Token decoding failed.")
   }
-})
+}
 
 export default authorize

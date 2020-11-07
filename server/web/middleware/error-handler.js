@@ -1,4 +1,5 @@
 import ArgumentError from "../../core/errors/ArgumentError.js"
+import UnauthorizedError from "../../core/errors/UnauthorizedError.js"
 import NotFoundError from "../../core/errors/NotFoundError.js"
 
 const errorHandler = (err, req, res, next) => {
@@ -10,6 +11,7 @@ const errorHandler = (err, req, res, next) => {
 
 const resolveStatusCode = (err) => {
   if (err instanceof ArgumentError) return 400
+  if (err instanceof UnauthorizedError) return 401
   else if (err instanceof NotFoundError) return 404
   return 500
 }
