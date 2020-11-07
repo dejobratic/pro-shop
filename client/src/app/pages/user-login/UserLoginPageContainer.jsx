@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import UserLoginPage from "app/pages/user-login/UserLoginPage"
 import Loader from "app/components/loader/Loader"
 
-import { selectUserLogin } from "app/redux/user-login/user-login-selectors"
+import { selectUserLogin } from "app/redux/user-login/selectors"
 
 const UserLoginPageContainer = ({ history, location }) => {
   const { currentUser, isLoaded } = useSelector(selectUserLogin)

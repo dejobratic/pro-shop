@@ -2,9 +2,9 @@ import React, { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Link, withRouter } from "react-router-dom"
 
-import { userSignOut } from "app/redux/user-login/user-login-actions"
-import { selectCurrentUser } from "app/redux/user-login/user-login-selectors"
-import { selectCartProductsQuantity } from "app/redux/cart/cart-selectors"
+import { userSignOut } from "app/redux/user-login/actions"
+import { selectCurrentUser } from "app/redux/user-login/selectors"
+import { selectCartProductsQuantity } from "app/redux/cart/selectors"
 
 import "app/components/header/header.css"
 

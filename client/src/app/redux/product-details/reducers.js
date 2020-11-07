@@ -1,4 +1,4 @@
-import { productDetailsActions } from "app/redux/product-details/product-details-actions"
+import { productDetailsActions } from "app/redux/product-details/actions"
 
 const INITIAL_STATE = {
   error: null,

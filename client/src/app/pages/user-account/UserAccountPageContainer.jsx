@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux"
 import UserAccountPage from "app/pages/user-account/UserAccountPage"
 import Loader from "app/components/loader/Loader"
 
-import { loadUserProfile } from "app/redux/user-account/user-account-actions"
-import { selectUserAccount } from "app/redux/user-account/user-account-selectors"
+import { loadUserProfile } from "app/redux/user-account/actions"
+import { selectUserAccount } from "app/redux/user-account/selectors"
 
-import { selectCurrentUser } from "app/redux/user-login/user-login-selectors"
+import { selectCurrentUser } from "app/redux/user-login/selectors"
 
 const UserAccountPageContainer = ({ history }) => {
   const dispatch = useDispatch()

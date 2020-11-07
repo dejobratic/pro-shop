@@ -5,7 +5,7 @@ import HomePage from "app/pages/home/HomePage"
 import Loader from "app/components/loader/Loader"
 import Warning from "app/components/warning/Warning"
 
-import { selectProducts } from "app/redux/products/products-selectors"
+import { selectProducts } from "app/redux/products/selectors"
 
 const HomePageContainer = () => {
   const { error, data, isDataLoaded } = useSelector(selectProducts)

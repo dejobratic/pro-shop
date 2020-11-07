@@ -1,12 +1,12 @@
 import { takeLatest, put, call, all } from "redux-saga/effects"
 
-import { userAccountActions } from "app/redux/user-account/user-account-actions"
+import { userAccountActions } from "app/redux/user-account/actions"
 import {
   loadUserProfileSuccess,
   loadUserProfileFailure,
   userProfileUpdateSuccess,
   userProfileUpdateFailure,
-} from "app/redux/user-account/user-account-actions"
+} from "app/redux/user-account/actions"
 
 import { userAccountService } from "app/services/UserAccountService"
 

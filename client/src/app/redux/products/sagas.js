@@ -4,7 +4,7 @@ import {
   productsActions,
   loadProductsSuccess,
   loadProductsFailure,
-} from "app/redux/products/products-actions"
+} from "app/redux/products/actions"
 
 import { productService } from "app/services/ProductService"
 

@@ -8,9 +8,9 @@ import Button from "app/components/button/Button"
 import {
   userProfileUpdate,
   userProfileUpdateFailure,
-} from "app/redux/user-account/user-account-actions"
+} from "app/redux/user-account/actions"
 
-import { selectUserAccountError } from "app/redux/user-account/user-account-selectors"
+import { selectUserAccountError } from "app/redux/user-account/selectors"
 
 const UserAccountPage = ({ profile }) => {
   const dispatch = useDispatch()

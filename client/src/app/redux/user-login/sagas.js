@@ -7,7 +7,7 @@ import {
   userSignUpSuccess,
   userSignUpFailure,
   userSignOutSuccess,
-} from "app/redux/user-login/user-login-actions"
+} from "app/redux/user-login/actions"
 
 import { userLoginService } from "app/services/UserLoginService"
 

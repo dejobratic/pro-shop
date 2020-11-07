@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux"
 import {
   addProductToCart,
   clearProductFromCart,
-} from "app/redux/cart/cart-actions"
+} from "app/redux/cart/actions"
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch()

@@ -5,9 +5,9 @@ import ProductDetailsPage from "app/pages/product-details/ProductDetailsPage"
 import Loader from "app/components/loader/Loader"
 import Warning from "app/components/warning/Warning"
 
-import { loadProductDetails } from "app/redux/product-details/product-details-actions"
+import { loadProductDetails } from "app/redux/product-details/actions"
 
-import { selectProduct } from "app/redux/product-details/product-details-selectors"
+import { selectProduct } from "app/redux/product-details/selectors"
 
 const ProductDetailsPageContainer = ({ match }) => {
   const productId = match.params.productId

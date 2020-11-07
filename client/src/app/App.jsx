@@ -12,7 +12,7 @@ import CheckoutPage from "app/pages/checkout/CheckoutPage"
 import { default as UserLoginPage } from "app/pages/user-login/UserLoginPageContainer"
 import { default as UserAccountPage } from "app/pages/user-account/UserAccountPageContainer"
 
-import { loadProducts } from "app/redux/products/products-actions"
+import { loadProducts } from "app/redux/products/actions"
 
 const App = () => {
   const dispatch = useDispatch()

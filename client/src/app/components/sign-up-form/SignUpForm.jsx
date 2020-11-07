@@ -8,7 +8,7 @@ import Button from "app/components/button/Button"
 import {
   userSignUp,
   userSignUpFailure,
-} from "app/redux/user-login/user-login-actions"
+} from "app/redux/user-login/actions"
 
 const SignUpForm = () => {
   const dispatch = useDispatch()

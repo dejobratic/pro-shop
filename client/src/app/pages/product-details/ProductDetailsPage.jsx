@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux"
 import Rating from "app/components/rating/Rating"
 import Button from "app/components/button/Button"
 
-import { addProductToCart } from "app/redux/cart/cart-actions"
+import { addProductToCart } from "app/redux/cart/actions"
 
 const ProductDetails = ({ product, match, history }) => {
   const dispatch = useDispatch()

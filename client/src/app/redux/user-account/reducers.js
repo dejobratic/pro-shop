@@ -1,4 +1,4 @@
-import { userAccountActions } from "app/redux/user-account/user-account-actions"
+import { userAccountActions } from "app/redux/user-account/actions"
 
 const INITIAL_STATE = {
   error: null,

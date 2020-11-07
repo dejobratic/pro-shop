@@ -1,4 +1,4 @@
-import { userLoginActions } from "app/redux/user-login/user-login-actions"
+import { userLoginActions } from "app/redux/user-login/actions"
 
 const INITIAL_STATE = {
   error: null,

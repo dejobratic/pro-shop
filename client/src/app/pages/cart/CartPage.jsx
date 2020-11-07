@@ -9,7 +9,7 @@ import {
   selectCartProducts,
   selectCartProductsPrice,
   selectCartProductsQuantity,
-} from "app/redux/cart/cart-selectors"
+} from "app/redux/cart/selectors"
 
 const CartPage = ({ history }) => {
   const products = useSelector(selectCartProducts)
