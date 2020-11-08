@@ -1,11 +1,7 @@
 import React from "react"
-import { Link } from "react-router-dom"
 
 import Rating from "app/components/rating/Rating"
-
-const ProductLink = ({ id, children }) => (
-  <Link to={`/products/${id}`}>{children}</Link>
-)
+import ProductLink from "app/components/product-link/ProductLink"
 
 const Product = ({ product }) => {
   const { _id: id } = product

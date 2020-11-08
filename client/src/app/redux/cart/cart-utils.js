@@ -11,7 +11,7 @@ export const addProductToCart = (products, productToAdd) => {
     )
   }
 
-  return [...products, { ...productToAdd, quantity: 1 }]
+  return [...products, { ...productToAdd }]
 }
 
 export const removeProductFromCart = (products, productToRemove) => {

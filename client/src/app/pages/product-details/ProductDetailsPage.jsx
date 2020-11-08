@@ -12,7 +12,7 @@ const ProductDetails = ({ product, match, history }) => {
   const [quantity, setQuantity] = useState(1)
 
   const onChangeQuantity = (event) => {
-    const quantity = event.target.value
+    const quantity = Number(event.target.value)
     setQuantity(quantity)
   }
 

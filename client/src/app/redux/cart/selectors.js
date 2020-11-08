@@ -10,7 +10,10 @@ export const selectCartProducts = createSelector(
 export const selectCartProductsQuantity = createSelector(
   [selectCartProducts],
   (products) =>
-    products.reduce((total, product) => total + product.quantity || 0, 0)
+    products.reduce(
+      (total, product) => total + Number(product.quantity) || 0,
+      0
+    )
 )
 
 export const selectCartProductsPrice = createSelector(
@@ -18,7 +21,8 @@ export const selectCartProductsPrice = createSelector(
   (products) =>
     products
       .reduce(
-        (total, product) => total + product.price * product.quantity || 0,
+        (total, product) =>
+          total + Number(product.price) * Number(product.quantity) || 0,
         0
       )
       .toFixed(2)

@@ -1,11 +1,9 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
 
-import {
-  addProductToCart,
-  clearProductFromCart,
-} from "app/redux/cart/actions"
+import ProductLink from "app/components/product-link/ProductLink"
+
+import { addProductToCart, clearProductFromCart } from "app/redux/cart/actions"
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch()
@@ -22,14 +20,16 @@ const CartItem = ({ item }) => {
   return (
     <div className="row">
       <div className="col-md-2">
-        <img
-          className="img-fluid img-thumbnail"
-          src={item.image}
-          alt={item.name}
-        />
+        <ProductLink id={item._id}>
+          <img
+            className="img-fluid img-thumbnail"
+            src={item.image}
+            alt={item.name}
+          />
+        </ProductLink>
       </div>
       <div className="col-md-3">
-        <Link to={`/products/${item._id}`}>{item.name}</Link>
+        <ProductLink id={item._id}>{item.name}</ProductLink>
       </div>
       <div className="col-md-2">${item.price}</div>
       <div className="col-md-3">
