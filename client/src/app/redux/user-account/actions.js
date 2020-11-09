@@ -8,6 +8,7 @@ export const userAccountActions = {
   USER_PROFILE_UPDATE_FAILURE: "USER_PROFILE_UPDATE_FAILURE",
 }
 
+// USER PROFILE
 export const loadUserProfile = (id, token) => ({
   type: userAccountActions.LOAD_USER_PROFILE_START,
   payload: { id, token },

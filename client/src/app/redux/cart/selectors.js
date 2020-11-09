@@ -27,3 +27,13 @@ export const selectCartProductsPrice = createSelector(
       )
       .toFixed(2)
 )
+
+export const selectCartProductsShippingPrice = createSelector(
+  [selectCartProductsPrice],
+  (price) => (price > 100 ? 0 : 10).toFixed(2)
+)
+
+export const selectCartProductsTaxPrice = createSelector(
+  [selectCartProductsPrice],
+  (price) => (price * 0.15).toFixed(2)
+)

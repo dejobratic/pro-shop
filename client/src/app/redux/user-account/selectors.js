@@ -7,6 +7,11 @@ export const selectUserProfile = createSelector(
   (userAccount) => userAccount.profile
 )
 
+export const selectUserOrders = createSelector(
+  [selectUserAccount],
+  (userAccount) => userAccount.orders
+)
+
 export const selectUserAccountError = createSelector(
   [selectUserAccount],
   (userAccount) => userAccount.error

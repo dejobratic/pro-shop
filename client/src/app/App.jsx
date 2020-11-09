@@ -26,12 +26,12 @@ const App = () => {
       <Header />
       <main className="py-3">
         <div className="container">
-          <Route exact path="/" component={HomePage} />
+          <Route path="/login" component={UserLoginPage} />
+          <Route path="/account" component={UserAccountPage} />
           <Route path="/products/:productId" component={ProductPage} />
           <Route path="/cart/:productId?" component={CartPage} />
           <Route path="/checkout" component={CheckoutPage} />
-          <Route path="/login" component={UserLoginPage} />
-          <Route path="/account" component={UserAccountPage} />
+          <Route exact path="/" component={HomePage} />
         </div>
       </main>
       <Footer />

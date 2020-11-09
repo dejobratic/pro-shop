@@ -3,7 +3,8 @@ import { userAccountActions } from "app/redux/user-account/actions"
 const INITIAL_STATE = {
   error: null,
   profile: null,
-  orders: null,
+  shippingAddress: null, //TODO: handle
+  orders: [],
   isDataLoaded: false,
 }
 

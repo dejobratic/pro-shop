@@ -7,11 +7,12 @@ import productDetailsReducer from "app/redux/product-details/reducers"
 import cartReducer from "app/redux/cart/reducers"
 import userLoginReducer from "app/redux/user-login/reducers"
 import userAccountReducer from "app/redux/user-account/reducers"
+import checkoutReducer from "app/redux/checkout/reducers"
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["cart", "userLogin"],
+  whitelist: ["cart", "userLogin", "checkout"],
 }
 
 const rootReducer = combineReducers({
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   userLogin: userLoginReducer,
   userAccount: userAccountReducer,
+  checkout: checkoutReducer,
 })
 
 export default persistReducer(persistConfig, rootReducer)
