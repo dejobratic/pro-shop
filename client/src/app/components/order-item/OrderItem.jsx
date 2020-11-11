@@ -1,21 +1,17 @@
 import React from "react"
-import ProductLink from "../product-link/ProductLink"
+
+import ProductImage from "app/components/product-image/ProductImage"
+import ProductName from "app/components/product-name/ProductName"
 
 const OrderItem = ({ item }) => {
   return (
     <div className="list-group-item">
       <div className="row">
         <div className="col-md-1">
-          <ProductLink id={item._id}>
-            <img
-              className="img-fluid img-thumbnail"
-              src={item.image}
-              alt={item.name}
-            />
-          </ProductLink>
+          <ProductImage className="img-fluid img-thumbnail" product={item} />
         </div>
         <div className="col">
-          <ProductLink id={item._id}>{item.name}</ProductLink>
+          <ProductName product={item} />
         </div>
         <div className="col-md-4">
           {item.quantity} x ${item.price} = $

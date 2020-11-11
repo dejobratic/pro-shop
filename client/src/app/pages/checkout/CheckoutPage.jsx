@@ -1,13 +1,20 @@
 import React, { useEffect } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
-import CheckoutSteps from "app/components/checkout-steps/CheckoutSteps"
+import CheckoutSteps from "app/components/checkout-step-navigation/CheckoutStepNavigation"
 import ShippingAddressForm from "app/components/shipping-address-form/ShippingAddressForm"
 import PaymentMethodForm from "app/components/payment-method-form/PaymentMethodForm"
+import OrderSummary from "app/components/order-summary/OrderSummary"
+
+import { createOrder } from "app/redux/checkout/actions"
+import { clearCart } from "app/redux/cart/actions"
+
+import { selectCurrentUser } from "app/redux/user-login/selectors"
 
 import {
   selectShippingAddress,
   selectPaymentMethod,
+  selectCreatedOrder,
   selectCurrentCheckoutStep,
 } from "app/redux/checkout/selectors"
 
@@ -16,14 +23,18 @@ import {
   selectCartProductsPrice,
   selectCartProductsShippingPrice,
   selectCartProductsTaxPrice,
+  selectCartProductsTotalPrice,
 } from "app/redux/cart/selectors"
 
 import { checkoutStep } from "app/constants/checkout.constants"
-import Warning from "app/components/warning/Warning"
-import OrderItem from "app/components/order-item/OrderItem"
-import Button from "app/components/button/Button"
+import CheckoutItem from "app/components/checkout-item/CheckoutItem"
+import OrderItemList from "app/components/order-item-list/OrderItemList"
 
 const CheckoutPage = ({ history }) => {
+  const dispatch = useDispatch()
+  const currentUser = useSelector(selectCurrentUser)
+
+  const createdOrder = useSelector(selectCreatedOrder)
   const shippingAddress = useSelector(selectShippingAddress)
   const paymentMethod = useSelector(selectPaymentMethod)
   const currentStep = useSelector(selectCurrentCheckoutStep)
@@ -32,16 +43,13 @@ const CheckoutPage = ({ history }) => {
   const cartProductsPrice = useSelector(selectCartProductsPrice)
   const cartProductsShippingPrice = useSelector(selectCartProductsShippingPrice)
   const cartProductsTaxPrice = useSelector(selectCartProductsTaxPrice)
-
-  const totalPrice = (
-    Number(cartProductsPrice) +
-    Number(cartProductsShippingPrice) +
-    Number(cartProductsTaxPrice)
-  ).toFixed(2)
-
-  const onPlaceOrder = () => {}
+  const totalPrice = useSelector(selectCartProductsTotalPrice)
 
   useEffect(() => {
+    if (createdOrder) {
+      history.push(`/orders/${createdOrder._id}`)
+      return
+    }
     switch (currentStep) {
       case 1:
         history.push("/checkout/shipping")
@@ -55,7 +63,24 @@ const CheckoutPage = ({ history }) => {
       default:
         return null
     }
-  }, [currentStep, history])
+  }, [currentStep, history, createdOrder])
+
+  const onPlaceOrder = () => {
+    const order = {
+      orderItems: cartProducts.map((p) => {
+        return { ...p, product: p._id }
+      }),
+      shippingAddress,
+      paymentMethod,
+      itemsPrice: cartProductsPrice,
+      shippingPrice: cartProductsShippingPrice,
+      taxPrice: cartProductsTaxPrice,
+      totalPrice,
+    }
+
+    dispatch(createOrder(order, currentUser.token))
+    dispatch(clearCart())
+  }
 
   return (
     <>
@@ -67,75 +92,23 @@ const CheckoutPage = ({ history }) => {
         <div className="row">
           <div className="col-md-8">
             <div className="list-group-flush">
+              <CheckoutItem
+                title="Shipping"
+                label="Address"
+                value={`${shippingAddress.address}, ${shippingAddress.city}  ${shippingAddress.postalCode}, ${shippingAddress.country}`}
+              />
+              <CheckoutItem
+                title="Payment Method"
+                label="Payment"
+                value={paymentMethod}
+              />
               <div className="list-group-item">
-                <h2>Shipping</h2>
-                <p>
-                  <strong>Address: </strong>
-                  {`${shippingAddress.streetAddress}, ${shippingAddress.city}  ${shippingAddress.postalCode}, ${shippingAddress.country}`}
-                </p>
-              </div>
-              <div className="list-group-item">
-                <h2>Payment Method</h2>
-                <p>
-                  <strong>Payment: </strong>
-                  {paymentMethod}
-                </p>
-              </div>
-              <div className="list-group-item">
-                <h2>Order items</h2>
-                {cartProducts.length === 0 ? (
-                  <Warning>Your cart is empty</Warning>
-                ) : (
-                  <div className="list-group-flush">
-                    {cartProducts.map((product, idx) => (
-                      <OrderItem key={idx} item={product} />
-                    ))}
-                  </div>
-                )}
+                <OrderItemList />
               </div>
             </div>
           </div>
           <div className="col-md-4">
-            <div className="card">
-              <div className="list-group-flush">
-                <div className="list-group-item">
-                  <h2>Order Summary</h2>
-                </div>
-                <div className="list-group-item">
-                  <div className="row">
-                    <div className="col">Items</div>
-                    <div className="col">${cartProductsPrice}</div>
-                  </div>
-                </div>
-                <div className="list-group-item">
-                  <div className="row">
-                    <div className="col">Shipping</div>
-                    <div className="col">${cartProductsShippingPrice}</div>
-                  </div>
-                </div>
-                <div className="list-group-item">
-                  <div className="row">
-                    <div className="col">Tax</div>
-                    <div className="col">${cartProductsTaxPrice}</div>
-                  </div>
-                </div>
-                <div className="list-group-item">
-                  <div className="row">
-                    <div className="col">Total</div>
-                    <div className="col">${totalPrice}</div>
-                  </div>
-                </div>
-                <div className="list-group-item">
-                  <Button
-                    type="button"
-                    disabled={cartProducts.length === 0}
-                    onClick={onPlaceOrder}
-                  >
-                    Place Order
-                  </Button>
-                </div>
-              </div>
-            </div>
+            <OrderSummary onPlaceOrder={onPlaceOrder} />
           </div>
         </div>
       )}

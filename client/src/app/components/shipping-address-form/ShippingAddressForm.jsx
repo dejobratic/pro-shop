@@ -17,21 +17,17 @@ import {
 
 const ShippingAddressForm = () => {
   const dispatch = useDispatch()
-  const currentShippingAddress = useSelector(selectShippingAddress) || {}
+  const defaultAddr = useSelector(selectShippingAddress) || {}
   const currentCheckoutStep = useSelector(selectCurrentCheckoutStep)
 
-  const [streetAddress, setStreetAddress] = useState(
-    currentShippingAddress.streetAddress
-  )
-  const [city, setCity] = useState(currentShippingAddress.city)
-  const [postalCode, setPostalCode] = useState(
-    currentShippingAddress.postalCode
-  )
-  const [country, setCountry] = useState(currentShippingAddress.country)
+  const [address, setAddress] = useState(defaultAddr.address)
+  const [city, setCity] = useState(defaultAddr.city)
+  const [postalCode, setPostalCode] = useState(defaultAddr.postalCode)
+  const [country, setCountry] = useState(defaultAddr.country)
 
   const onSubmit = (e) => {
     e.preventDefault()
-    dispatch(saveShippingAddress({ streetAddress, city, postalCode, country }))
+    dispatch(saveShippingAddress({ address, city, postalCode, country }))
     dispatch(saveCurrentCheckoutStep(currentCheckoutStep + 1))
   }
 
@@ -40,10 +36,10 @@ const ShippingAddressForm = () => {
       <h2>Shipping</h2>
       <form onSubmit={onSubmit}>
         <FormInput
-          name="streetAddress"
+          name="address"
           type="text"
-          value={streetAddress}
-          onChange={(e) => setStreetAddress(e.target.value)}
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
           label="Street Address"
           required
         />

@@ -1,7 +1,8 @@
 import React from "react"
 import { useDispatch } from "react-redux"
 
-import ProductLink from "app/components/product-link/ProductLink"
+import ProductImage from "app/components/product-image/ProductImage"
+import ProductName from "app/components/product-name/ProductName"
 
 import { addProductToCart, clearProductFromCart } from "app/redux/cart/actions"
 
@@ -20,16 +21,10 @@ const CartItem = ({ item }) => {
   return (
     <div className="row">
       <div className="col-md-2">
-        <ProductLink id={item._id}>
-          <img
-            className="img-fluid img-thumbnail"
-            src={item.image}
-            alt={item.name}
-          />
-        </ProductLink>
+        <ProductImage className="img-fluid img-thumbnail" product={item} />
       </div>
       <div className="col-md-3">
-        <ProductLink id={item._id}>{item.name}</ProductLink>
+        <ProductName product={item} />
       </div>
       <div className="col-md-2">${item.price}</div>
       <div className="col-md-3">

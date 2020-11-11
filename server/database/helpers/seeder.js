@@ -4,8 +4,8 @@ import colors from "colors"
 
 import connectDb from "./config/db.js"
 
-import users from "./data/users.js"
-import products from "./data/products.js"
+import users from "./data/user-seed.js"
+import products from "./data/product-seed.js"
 
 import User from "./models/user.js"
 import Product from "./models/product.js"

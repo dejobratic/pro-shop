@@ -16,3 +16,8 @@ export const selectCurrentCheckoutStep = createSelector(
   [selectCheckout],
   (checkout) => checkout.currentStep
 )
+
+export const selectCreatedOrder = createSelector(
+  [selectCheckout],
+  (checkout) => checkout.createdOrder
+)

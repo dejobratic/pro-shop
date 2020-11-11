@@ -2,6 +2,7 @@ export const cartActions = {
   ADD_PRODUCT_TO_CART: "ADD_PRODUCT_TO_CART",
   REMOVE_PRODUCT_FROM_CART: "REMOVE_PRODUCT_FROM_CART",
   CLEAR_PRODUCT_FROM_CART: "CLEAR_PRODUCT_FROM_CART",
+  CLEAR_CART: "CLEAR_CART",
 }
 
 export const addProductToCart = (product) => ({
@@ -17,4 +18,8 @@ export const removeProductFromCart = (product) => ({
 export const clearProductFromCart = (product) => ({
   type: cartActions.CLEAR_PRODUCT_FROM_CART,
   payload: product,
+})
+
+export const clearCart = () => ({
+  type: cartActions.CLEAR_CART,
 })

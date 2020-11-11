@@ -6,6 +6,7 @@ import connectDb from "./database/config/db.js"
 
 import productRouter from "./web/routes/product-routes.js"
 import userRouter from "./web/routes/user-routes.js"
+import orderRouter from "./web/routes/order-routes.js"
 import errorHandler from "./web/middleware/error-handler.js"
 
 dotenv.config()
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/products", productRouter)
 app.use("/api/users", userRouter)
+app.use("/api/orders", orderRouter)
 app.use(errorHandler)
 
 const port = process.env.PORT || 5000

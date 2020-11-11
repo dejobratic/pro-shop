@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler"
 
-import { userRepository } from "../../database/services/UserRepository.js"
-import { jwtGenerator } from "../services/JWTGenerator.js"
+import { userRepository } from "../../database/services/user-repository.js"
+import { jwtGenerator } from "../services/jwt-generator.js"
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login

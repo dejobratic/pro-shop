@@ -7,7 +7,7 @@ import { saveCurrentCheckoutStep } from "app/redux/checkout/actions"
 
 import { checkoutStep } from "app/constants/checkout.constants"
 
-const CheckoutSteps = ({ currentStep }) => {
+const CheckoutStepNavigation = ({ currentStep }) => {
   const dispatch = useDispatch()
 
   return (
@@ -44,4 +44,4 @@ const CheckoutSteps = ({ currentStep }) => {
   )
 }
 
-export default CheckoutSteps
+export default CheckoutStepNavigation

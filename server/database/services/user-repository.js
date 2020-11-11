@@ -31,10 +31,10 @@ class UserRepository {
     if (existingUser)
       throw new ArgumentError(`User with email ${email} already exists.`)
 
-    const newUser = await User.create(user)
-    if (!newUser) throw new ArgumentError("Unable to create user.")
+    const createdUser = await User.create(user)
+    if (!createdUser) throw new ArgumentError("Unable to create user.")
 
-    return map(newUser)
+    return map(createdUser)
   }
 
   async update(user) {

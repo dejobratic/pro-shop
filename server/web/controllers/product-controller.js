@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler"
 
-import { productRepository } from "../../database/services/ProductRepository.js"
+import { productRepository } from "../../database/services/product-repository.js"
 
 // @desc    Get all products
 // @route   GET /api/products

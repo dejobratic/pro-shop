@@ -2,15 +2,14 @@ import React from "react"
 
 import Rating from "app/components/rating/Rating"
 import ProductLink from "app/components/product-link/ProductLink"
+import ProductImage from "app/components/product-image/ProductImage"
 
 const Product = ({ product }) => {
   const { _id: id } = product
 
   return (
     <div className="card my-3 p-3 rounded">
-      <ProductLink id={id}>
-        <img className="card-img-top" src={product.image} alt={product.name} />
-      </ProductLink>
+      <ProductImage className="card-img-top" product={product} />
 
       <div className="card-body">
         <ProductLink id={id}>

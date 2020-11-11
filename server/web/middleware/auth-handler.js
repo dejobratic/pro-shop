@@ -3,7 +3,7 @@ import asyncHandler from "express-async-handler"
 
 import UnauthorizedError from "../../core/errors/UnauthorizedError.js"
 
-import { userRepository } from "../../database/services/UserRepository.js"
+import { userRepository } from "../../database/services/user-repository.js"
 
 const authorize = asyncHandler(async (req, res, next) => {
   const {
