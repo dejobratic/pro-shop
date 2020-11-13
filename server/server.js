@@ -25,6 +25,10 @@ app.use("/api/users", userRouter)
 app.use("/api/orders", orderRouter)
 app.use(errorHandler)
 
+app.get("/api/config/pay-pal", (req, res) =>
+  res.send(process.env.PAYPAL_CLIENT_ID)
+)
+
 const port = process.env.PORT || 5000
 
 app.listen(

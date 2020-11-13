@@ -103,7 +103,7 @@ const CheckoutPage = ({ history }) => {
                 value={paymentMethod}
               />
               <div className="list-group-item">
-                <OrderItemList />
+                <OrderItemList orderItems={cartProducts} />
               </div>
             </div>
           </div>

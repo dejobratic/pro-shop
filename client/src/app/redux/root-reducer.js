@@ -8,6 +8,7 @@ import cartReducer from "app/redux/cart/reducers"
 import userLoginReducer from "app/redux/user-login/reducers"
 import userAccountReducer from "app/redux/user-account/reducers"
 import checkoutReducer from "app/redux/checkout/reducers"
+import orderDetailsReducer from "app/redux/order-details/reducers"
 
 const persistConfig = {
   key: "root",
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   userLogin: userLoginReducer,
   userAccount: userAccountReducer,
   checkout: checkoutReducer,
+  orderDetails: orderDetailsReducer,
 })
 
 export default persistReducer(persistConfig, rootReducer)

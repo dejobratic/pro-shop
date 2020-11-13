@@ -14,6 +14,14 @@ class OrderRepository {
 
     return order
   }
+
+  async getByUserId(userId) {
+    return await Order.find({ user: userId })
+  }
+
+  async update(order) {
+    return await order.save()
+  }
 }
 
 export const orderRepository = new OrderRepository()

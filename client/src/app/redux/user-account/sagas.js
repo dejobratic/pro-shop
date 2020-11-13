@@ -1,18 +1,21 @@
 import { takeLatest, put, call, all } from "redux-saga/effects"
 
-import { userAccountActions } from "app/redux/user-account/actions"
 import {
+  userAccountActions,
   loadUserProfileSuccess,
   loadUserProfileFailure,
   userProfileUpdateSuccess,
   userProfileUpdateFailure,
+  loadUserOrdersSuccess,
+  loadUserOrdersFailure,
 } from "app/redux/user-account/actions"
 
 import { userAccountService } from "app/services/UserAccountService"
+import { orderService } from "app/services/OrderService"
 
 import { getDetails } from "app/utils/error-extensions"
 
-function* getUserProfile(action) {
+function* loadUserProfile(action) {
   try {
     const { id, token } = action.payload
     const profile = yield userAccountService.getProfile(id, `Bearer ${token}`)
@@ -35,8 +38,18 @@ function* updateUserProfile(action) {
   }
 }
 
-function* onGetUserProfile() {
-  yield takeLatest(userAccountActions.LOAD_USER_PROFILE_START, getUserProfile)
+function* loadUserOrders(action) {
+  try {
+    const { id, token } = action.payload
+    const orders = yield orderService.getByUserId(id, `Bearer ${token}`)
+    yield put(loadUserOrdersSuccess(orders))
+  } catch (error) {
+    yield put(loadUserOrdersFailure(getDetails(error)))
+  }
+}
+
+function* onLoadUserProfile() {
+  yield takeLatest(userAccountActions.LOAD_USER_PROFILE_START, loadUserProfile)
 }
 
 function* onUpdateUserProfile() {
@@ -46,6 +59,14 @@ function* onUpdateUserProfile() {
   )
 }
 
+function* onLoadUserOrders() {
+  yield takeLatest(userAccountActions.LOAD_USER_ORDERS_START, loadUserOrders)
+}
+
 export default function* userAccountSagas() {
-  yield all([call(onGetUserProfile), call(onUpdateUserProfile)])
+  yield all([
+    call(onLoadUserProfile),
+    call(onUpdateUserProfile),
+    call(onLoadUserOrders),
+  ])
 }

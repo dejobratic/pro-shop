@@ -6,6 +6,10 @@ export const userAccountActions = {
   USER_PROFILE_UPDATE_START: "USER_PROFILE_UPDATE_START",
   USER_PROFILE_UPDATE_SUCCESS: "USER_PROFILE_UPDATE_SUCCESS",
   USER_PROFILE_UPDATE_FAILURE: "USER_PROFILE_UPDATE_FAILURE",
+
+  LOAD_USER_ORDERS_START: "LOAD_USER_ORDERS_START",
+  LOAD_USER_ORDERS_SUCCESS: "LOAD_USER_ORDERS_SUCCESS",
+  LOAD_USER_ORDERS_FAILURE: "LOAD_USER_ORDERS_FAILURE",
 }
 
 // USER PROFILE
@@ -36,5 +40,21 @@ export const userProfileUpdateSuccess = (profile) => ({
 
 export const userProfileUpdateFailure = (error) => ({
   type: userAccountActions.USER_PROFILE_UPDATE_FAILURE,
+  payload: error,
+})
+
+// USER ORDERS
+export const loadUserOrders = (id, token) => ({
+  type: userAccountActions.LOAD_USER_ORDERS_START,
+  payload: { id, token },
+})
+
+export const loadUserOrdersSuccess = (orders) => ({
+  type: userAccountActions.LOAD_USER_ORDERS_SUCCESS,
+  payload: orders,
+})
+
+export const loadUserOrdersFailure = (error) => ({
+  type: userAccountActions.LOAD_USER_ORDERS_FAILURE,
   payload: error,
 })

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import UserAccountPage from "app/pages/user-account/UserAccountPage"
 import Loader from "app/components/loader/Loader"
 
-import { loadUserProfile } from "app/redux/user-account/actions"
+import { loadUserProfile, loadUserOrders } from "app/redux/user-account/actions"
 import { selectUserAccount } from "app/redux/user-account/selectors"
 
 import { selectCurrentUser } from "app/redux/user-login/selectors"
@@ -16,16 +16,20 @@ const UserAccountPageContainer = ({ history }) => {
   useEffect(() => {
     if (currentUser) {
       dispatch(loadUserProfile(currentUser._id, currentUser.token))
+      dispatch(loadUserOrders(currentUser._id, currentUser.token))
     } else {
       history.push("/login")
     }
   }, [history, dispatch, currentUser])
 
-  const { profile, isDataLoaded } = useSelector(selectUserAccount)
+  const { profile, orders, isDataLoaded } = useSelector(selectUserAccount)
 
   if (isDataLoaded)
     return (
-      <UserAccountPage profile={{ ...profile, token: currentUser.token }} /> //TODO: leaking logic fix
+      <UserAccountPage
+        profile={{ ...profile, token: currentUser.token }}
+        orders={orders}
+      /> //TODO: leaking logic fix
     )
 
   return <Loader />

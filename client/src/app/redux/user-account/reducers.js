@@ -19,6 +19,14 @@ const userAccountReducer = (state = INITIAL_STATE, action) => {
         isDataLoaded: false,
       }
 
+    case userAccountActions.LOAD_USER_ORDERS_START:
+      return {
+        ...state,
+        error: null,
+        orders: [],
+        isDataLoaded: false,
+      }
+
     case userAccountActions.LOAD_USER_PROFILE_SUCCESS:
     case userAccountActions.USER_PROFILE_UPDATE_SUCCESS:
       return {
@@ -28,8 +36,17 @@ const userAccountReducer = (state = INITIAL_STATE, action) => {
         isDataLoaded: true,
       }
 
+    case userAccountActions.LOAD_USER_ORDERS_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        orders: action.payload,
+        isDataLoaded: true,
+      }
+
     case userAccountActions.LOAD_USER_PROFILE_FAILURE:
     case userAccountActions.USER_PROFILE_UPDATE_FAILURE:
+    case userAccountActions.LOAD_USER_ORDERS_FAILURE:
       return {
         ...state,
         error: action.payload,

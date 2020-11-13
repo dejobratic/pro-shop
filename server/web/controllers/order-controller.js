@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler"
 
 import ArgumentError from "../../core/errors/ArgumentError.js"
 
+import { payOrderUseCase } from "../../core/use-cases/pay-order-use-case.js"
 import { orderRepository } from "../../database/services/order-repository.js"
 
 //  @desc   Create new order
@@ -43,4 +44,25 @@ const getOrderById = asyncHandler(async (req, res) => {
   res.status(200).json(order)
 })
 
-export { createOrder, getOrderById }
+//  @desc   Get user orders
+//  @route  GET /api/orders/my-orders
+//  @access Private
+const getMyOrders = asyncHandler(async (req, res) => {
+  const orders = await orderRepository.getByUserId(req.user._id)
+  res.status(200).json(orders)
+})
+
+//  @desc   Pay order
+//  @route  PUT /api/orders/:id/payment
+//  @access Private
+const payOrder = asyncHandler(async (req, res) => {
+  const paymentRequest = {
+    orderId: req.params.orderId,
+    payment: req.body.payment,
+  }
+
+  const paidOrder = await payOrderUseCase.execute(paymentRequest)
+  res.status(200).json(paidOrder)
+})
+
+export { createOrder, getOrderById, getMyOrders, payOrder }

@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 
 import FormInput from "app/components/form-input/FormInput"
@@ -12,7 +13,7 @@ import {
 
 import { selectUserAccountError } from "app/redux/user-account/selectors"
 
-const UserAccountPage = ({ profile }) => {
+const UserAccountPage = ({ profile, orders }) => {
   const dispatch = useDispatch()
   const [name, setName] = useState(profile.name)
   const [email, setEmail] = useState(profile.email)
@@ -91,6 +92,50 @@ const UserAccountPage = ({ profile }) => {
         </div>
         <div className="col-md-9">
           <h2>Orders</h2>
+          <div className="table-responsive">
+            <table className="table table-sm table-striped table-bordered table-hover">
+              <thead className="thead-light">
+                <tr>
+                  <th>Id</th>
+                  <th>Date</th>
+                  <th>Total</th>
+                  <th>Paid</th>
+                  <th>Delivered</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map((order) => (
+                  <tr key={order._id}>
+                    <td>
+                      <Link to={`/orders/${order._id}`}>{order._id}</Link>
+                    </td>
+                    <td>{order.createdAt.substring(0, 10)}</td>
+                    <td>${order.totalPrice}</td>
+                    <td>
+                      {order.isPaid ? (
+                        order.paidAt.substring(0, 10)
+                      ) : (
+                        <i
+                          className="fas fa-times"
+                          style={{ color: "red" }}
+                        ></i>
+                      )}
+                    </td>
+                    <td>
+                      {order.isDelivered ? (
+                        order.deliveredAt.substring(0, 10)
+                      ) : (
+                        <i
+                          className="fas fa-times"
+                          style={{ color: "red" }}
+                        ></i>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </>

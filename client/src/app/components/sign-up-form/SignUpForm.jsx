@@ -5,10 +5,7 @@ import FormContainer from "app/components/form-container/FormContainer"
 import FormInput from "app/components/form-input/FormInput"
 import Button from "app/components/button/Button"
 
-import {
-  userSignUp,
-  userSignUpFailure,
-} from "app/redux/user-login/actions"
+import { userSignUp, userSignUpFailure } from "app/redux/user-login/actions"
 
 const SignUpForm = () => {
   const dispatch = useDispatch()
@@ -54,6 +51,7 @@ const SignUpForm = () => {
           name="password"
           type="password"
           value={password}
+          autoComplete="on"
           onChange={(e) => setPassword(e.target.value)}
           label="password"
           required
@@ -63,6 +61,7 @@ const SignUpForm = () => {
           name="confirmedPassword"
           type="password"
           value={confirmedPassword}
+          autoComplete="on"
           onChange={(e) => setConfirmedPassword(e.target.value)}
           label="confirm password"
           required
